@@ -75,7 +75,7 @@ const Register = () => {
     e.preventDefault();
     const {name, email, password, reEnterPassword} = user;
     if(name && email && password && (password === reEnterPassword)){
-      const res = await userRequest.post("/auth/register", user)
+      await userRequest.post("/auth/register", user)
       .then(response=>{
         alert("successfull",response);
         navigate("/login")
