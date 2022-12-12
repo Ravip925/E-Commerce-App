@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://helpful-mite-undershirt.cyclic.app/api/";
+const BASE_URL = "https://ecommerceapi-uni5.onrender.com/api/";
 
 
 const user = JSON.parse(localStorage.getItem("persist:root"))?.user;
