@@ -9,8 +9,9 @@ import { NavLink, useNavigate } from "react-router-dom";
 const Container = styled.div`
   height: 60px;
   text-decoration: none;
+  background-color:#ffdf40;
 
-  ${mobile({height: "50px"})}
+  ${mobile({height: "85px",marginBottom:"10px"})}
 `;
 
 const Wrapper = styled.div`
@@ -20,12 +21,13 @@ const Wrapper = styled.div`
   align-items: center;
   align-content: center;
 
-  ${mobile({padding: "10px 0"})}
+  ${mobile({boxSizing:"borderBox",justifyContent:"spaceAround",padding: "10px 15px", backgroundColor: "pink"})}
 `;
 const Left = styled.div`
   flex: 1;
   display : flex;
   align-items: center;
+  ${mobile({display: "none"})}
 `;
 const Input = styled.input`
     border: none;
@@ -51,6 +53,7 @@ const Logo = styled.div`
 `
 const Image = styled.img`
   width: 15%;
+  ${mobile({width: "90%"})}
 `;
 
 const Right = styled.div`
@@ -60,7 +63,7 @@ const Right = styled.div`
   flex-direction:row;
   justify-content: flex-end;
 
-  ${mobile({flex: 2, justifyContent: "center"})}
+  ${mobile({height:"70px",flex: 2.5, justifyContent: "center"})}
 `;
 const MenuItem = styled.div`
     font-size: 14px;
@@ -69,7 +72,7 @@ const MenuItem = styled.div`
     &:hover{
       color: #3f3f3f;
     }
-    ${mobile({fontSize: "12px", marginLeft: "10px"})}
+    ${mobile({width: "100%",fontSize: "16px", marginRight: "25px"})}
 `
 
 const Navbar = () => {

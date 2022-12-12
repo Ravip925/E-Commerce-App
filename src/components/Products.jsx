@@ -22,8 +22,8 @@ const Products = ({cat,filters,sort}) => {
       try {
         const res = await axios.get(
           cat
-            ? `https://ecommerceapi-uni5.onrender.com/api/products?category=${cat}`
-            : "https://ecommerceapi-uni5.onrender.com/api/products"
+            ? `https://ecommerce-api-ravi.cyclic.app/api/products?category=${cat}`
+            : "https://ecommerce-api-ravi.cyclic.app/api/products"
         );
         setProducts(res.data)
       } catch (error) {}

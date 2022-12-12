@@ -6,7 +6,7 @@ import { mobile } from "../Responsive"
 const Container = styled.div`
     display: flex;
 
-    ${mobile({flexDirection: "column"})}
+    ${mobile({flexDirection: "column", backgroundColor:"#01D6C0"})}
 `
 const Left = styled.div`
     flex: 1;
@@ -65,7 +65,7 @@ const Right = styled.div`
     flex: 1;
     padding: 20px;
 
-    ${mobile({backgroundColor: "#fff5f5"})}
+    ${mobile()}
 `
 const ContactItem = styled.div`
     margin-bottom: 20px;
@@ -76,6 +76,7 @@ const ContactItem = styled.div`
 const Payments = styled.img`
     width: 50%;
     margin-left: -5px;
+    ${mobile({filter:"brightness(70%)"})}
 `
 
 

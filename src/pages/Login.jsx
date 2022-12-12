@@ -80,9 +80,9 @@ const Login = () => {
           <Input type="password" placeholder="password" onChange={(e)=>setPassword(e.target.value)}/>
           <Div>
             <Button onClick={handleClick} disabled={isFetching}>LOGIN</Button>
-            {error && <Error>Something went wrong...</Error>}
             <Button onClick={()=>navigate("/register")}>SIGN UP</Button>
-          </Div>
+            </Div>
+            {error && <Error>Something went wrong...</Error>}
         </Form>
       </Wrapper>
     </Container>

@@ -29,6 +29,7 @@ const Top = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 20px;
+    ${mobile({justifyContent: "center"})}
 `
 const TopButton = styled.button`
     padding: 10px;
@@ -67,28 +68,33 @@ box-sizing: border-box;
 const ProductDetail = styled.div`
    flex: 2;
    display: flex;
+   ${mobile({flexDirection: "column"})}
 `
 const Image = styled.img`
   width: 20vw;
+  ${mobile({width: "100%"})}
 `
 const Details = styled.div`
     padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    
 
 `
 const ProductName = styled.span`
   font-size: 25px;
+  ${mobile({marginBottom: "20px"})}
 `
 const ProductId = styled.span`
-
+  ${mobile({marginBottom: "20px"})}
 `
 const ProductColor = styled.div`
     width: 20px;
     height: 20px;
     border-radius: 50%;
     background-color: ${props=> props.color};
+    ${mobile({marginBottom: "20px"})}
 `
 const ProductSize = styled.span`
   color: black;
@@ -124,6 +130,8 @@ const Summary = styled.div`
     border-radius: 10px;
     padding: 10px;
     height: 50vh;
+    
+    ${mobile({boxSizing: "borderBox",padding: "20px", marginBottom: "40px", width: "82%",marginLeft:"10px"})}
 `
 const SummaryTitle = styled.h1`
     font-weight:200;
@@ -191,8 +199,8 @@ const Cart = () => {
 
   return (
     <Container>
-      <Navbar />
       <Annoucement />
+      <Navbar />
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
@@ -262,7 +270,7 @@ const Cart = () => {
             {user && cart.total>=1 ? (
               <StripeCheckout
                 name="Shop"
-                image="https://avatars.githubusercontent.com/u/1486366?v=4"
+                image="https://i.ibb.co/WyD4skn/vecteezy-colorful-beauty-dancer-logo-illustration-vector-template-8214205.png"
                 billingAddress
                 shippingAddress
                 description={`Your total is $${cart.total}`}

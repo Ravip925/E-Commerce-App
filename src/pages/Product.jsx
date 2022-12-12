@@ -13,7 +13,7 @@ import { mobile } from "../Responsive"
 import { useLayoutEffect } from "react";
 
 const Container = styled.div`
-    background-color: #ffeaea;
+    background-color: #ffdeaf;
 `
 const Wrapper = styled.div`
     padding: 50px;
@@ -39,9 +39,12 @@ const InfoContainer = styled.div`
 `
 const Title = styled.h1`
     font-weight: 400;
+    
+    ${mobile({textAlign: "center"})}
 `
 const Desc = styled.p`
     margin: 20px 0px;
+    ${mobile({textAlign: "center"})}
 `
 const Price = styled.span`
     font-weight: 100;
@@ -162,8 +165,8 @@ const Product = () => {
       });
   return (
     <Container>
-        <Navbar/>
         <Annoucement/>
+        <Navbar/>
         <Wrapper>
             <ImgContainer>
                 <Image src={product.img}/>

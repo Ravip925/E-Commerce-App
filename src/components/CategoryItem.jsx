@@ -7,7 +7,7 @@ const Image = styled.img`
   height: 100%;
   object-fit: cover;
   transition: all 0.5s ease;
-  ${mobile({height: "20vh"})}
+  ${mobile({height: "30vh"})}
 `
 const Container = styled.div`
   margin: 3px;

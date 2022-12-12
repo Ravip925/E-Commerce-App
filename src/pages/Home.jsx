@@ -8,8 +8,9 @@ import Products from '../components/Products'
 import Slider from '../components/Slider'
 
 const Homepage = () => {
-  return (
-    <div>
+  
+  return ( 
+     <div>
       <Annoucement/>
       <Navbar/>
       <Slider/>
@@ -17,7 +18,7 @@ const Homepage = () => {
       <Products/>
       <Newsletter/>
       <Footer/>
-    </div>
+      </div>
   )
 }
 

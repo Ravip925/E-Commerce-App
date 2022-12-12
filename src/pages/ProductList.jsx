@@ -80,8 +80,8 @@ const ProductList = () => {
 
   return (
     <Container>
-      <Navbar />
       <Annoucement />
+      <Navbar />
       <Title>{cat}</Title>
       <FilterContainer>
         <Filter>

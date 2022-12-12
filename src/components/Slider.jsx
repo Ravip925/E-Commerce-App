@@ -84,6 +84,7 @@ const BottomText = styled.h1`
 const Slider = () => {
   const navigate =  useNavigate();
   const [slideIndex, setSlideIndex] = useState(0);
+  
   const handleClick = (direction) => {
     if(direction === "left"){
       setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2)
@@ -92,6 +93,7 @@ const Slider = () => {
       setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0)
     }
   };
+
 
   const handleEvent=()=>{
     if(slideIndex===0){
