@@ -125,96 +125,119 @@ const Button = styled.button`
     }
 `
 
-    
+const Spinner = styled.div`
+  border: 10px solid #f3f3f3;
+  border-top: 10px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  ${mobile({width: "30px",height: "30px",border:"8px solid #f3f3f3", borderTop:"8px solid #3498db",left:"46%",top:"30%"})}
+
+`
 
 
 const Product = () => {
-    const location = useLocation();
-    const id = location.pathname.split("/")[2];
-    const dispatch = useDispatch();
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
+  const dispatch = useDispatch();
 
-    const [product, setProduct] = useState({});
-    const [quantity, setQuantity] = useState(1);
-    const [color, setColor] = useState("");
-    const [size, setSize] = useState("");
-    const [showText, setShowText] = useState(false);
-    
+  const [product, setProduct] = useState({});
+  const [quantity, setQuantity] = useState(1);
+  const [color, setColor] = useState("");
+  const [size, setSize] = useState("");
+  const [showText, setShowText] = useState(false);
+  const [spinner, setSpinner] = useState(false);
 
-    useEffect(() => {
-        const getProduct = async() => {
-            try {
-                const res = await publicRequest.get("/products/find/" + id);
-                setProduct(res.data);
-            } catch (error) {}
-        }
-        getProduct();
-    }, [id])
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const res = await publicRequest.get("/products/find/" + id);
+        setProduct(res.data);
+        setSpinner(true);
+      } catch (error) {}
+    };
+    getProduct();
+  }, [id]);
 
-    const handleQuantity =(type) => {
-        if(type === "inc"){
-            setQuantity(quantity + 1);
-        }
-        else{
-            quantity > 1 && setQuantity(quantity - 1);
-        }
+  const handleQuantity = (type) => {
+    if (type === "inc") {
+      setQuantity(quantity + 1);
+    } else {
+      quantity > 1 && setQuantity(quantity - 1);
     }
+  };
 
-    const handleClick = () =>{
-        dispatch(addProduct({...product, quantity, color,size}))
-        setShowText(!showText);
-    }
+  const handleClick = () => {
+    dispatch(addProduct({ ...product, quantity, color, size }));
+    setShowText(!showText);
+  };
 
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0);
-      });
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  });
   return (
     <Container>
-        
-        <Annoucement/>
-        <Navbar/>
-        <Wrapper>
+      <Annoucement />
+      <Navbar />
+      {spinner ? (
+        <>
+          <Wrapper>
             <ImgContainer>
-                <Image src={product.img}/>
+              <Image src={product.img} />
             </ImgContainer>
             <InfoContainer>
-                <Title>{product.title}</Title>
-                <Desc>{product.desc}</Desc>
-                <Price>$ {product.price}</Price>
-                <FilterContainer>
-                    <Filter>
-                        <FilterTitle>Color:</FilterTitle>
-                        {
-                            product.color?.map((c)=>(
-                                <FilterColor color={c} key={c} onClick={()=>setColor(c)}/>
-                            ))
-                        }
-                    </Filter>
-                    <Filter>
-                        <FilterTitle>Size</FilterTitle>
-                        <FilterSize onChange={(e)=>setSize(e.target.value)}>
-                            {
-                               product.size?.map((size)=>(
-                                   <FilterSizeOption key={size}>{size}</FilterSizeOption>
-                                
-                               )) 
-                            }
-                        </FilterSize>
-                    </Filter>
-                </FilterContainer>
-                <AddContainer>
-                    <AmountContainer>
-                        <Remove onClick={()=>handleQuantity("dec")}/>
-                        <Amount>{quantity}</Amount>
-                        <Add onClick={()=>handleQuantity("inc")}/>
-                    </AmountContainer>
-                    <Button onClick={handleClick}>{showText? "ADDED TO CART": "ADD TO CART"}</Button>
-                </AddContainer>
+              <Title>{product.title}</Title>
+              <Desc>{product.desc}</Desc>
+              <Price>$ {product.price}</Price>
+              <FilterContainer>
+                <Filter>
+                  <FilterTitle>Color:</FilterTitle>
+                  {product.color?.map((c) => (
+                    <FilterColor
+                      color={c}
+                      key={c}
+                      onClick={() => setColor(c)}
+                    />
+                  ))}
+                </Filter>
+                <Filter>
+                  <FilterTitle>Size</FilterTitle>
+                  <FilterSize onChange={(e) => setSize(e.target.value)}>
+                    {product.size?.map((size) => (
+                      <FilterSizeOption key={size}>{size}</FilterSizeOption>
+                    ))}
+                  </FilterSize>
+                </Filter>
+              </FilterContainer>
+              <AddContainer>
+                <AmountContainer>
+                  <Remove onClick={() => handleQuantity("dec")} />
+                  <Amount>{quantity}</Amount>
+                  <Add onClick={() => handleQuantity("inc")} />
+                </AmountContainer>
+                <Button onClick={handleClick}>
+                  {showText ? "ADDED TO CART" : "ADD TO CART"}
+                </Button>
+              </AddContainer>
             </InfoContainer>
-        </Wrapper>
-        <Newsletter/>
-        <Footer/>
+          </Wrapper>
+          <Newsletter />
+          <Footer />
+        </>
+      ) : (
+        <Spinner />
+      )}
     </Container>
-  )
-}
+  );
+};
 
 export default Product

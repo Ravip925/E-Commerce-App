@@ -59,22 +59,7 @@ const Option = styled.option`
   font-size:15px;
  
 `
-const Spinner = styled.div`
-  border: 10px solid #f3f3f3;
-  border-top: 10px solid #3498db;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 1s linear infinite;
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
 
-`
 
 
 const ProductList = () => {
@@ -100,15 +85,12 @@ const ProductList = () => {
     <Container>
       <Annoucement />
       <Navbar />
-      {
-        cat ? 
-        <>
-          <Title>{cat}</Title>
+      <Title>{cat}</Title>
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products:</FilterText>
-          <Select defaultValue={'Color'} name="color" onChange={handleFilters}>
-          <Option disabled value="Color">
+          <Select defaultValue={"Color"} name="color" onChange={handleFilters}>
+            <Option disabled value="Color">
               Color
             </Option>
             <Option>White</Option>
@@ -117,7 +99,7 @@ const ProductList = () => {
             <Option>Blue</Option>
             <Option>Pink</Option>
           </Select>
-          <Select name="size" defaultValue={'size'} onChange={handleFilters}>
+          <Select name="size" defaultValue={"size"} onChange={handleFilters}>
             <Option disabled value="size">
               Size
             </Option>
@@ -130,20 +112,16 @@ const ProductList = () => {
         </Filter>
         <Filter>
           <FilterText>Sort Products:</FilterText>
-          <Select onChange={(e)=>setSort(e.target.value)}>
+          <Select onChange={(e) => setSort(e.target.value)}>
             <Option value="newest">Newest</Option>
             <Option value="asc">Price (asc)</Option>
             <Option value="desc">Price (desc)</Option>
           </Select>
         </Filter>
       </FilterContainer>
-      <Products cat={cat} filters={filters} sort= {sort}/>
+      <Products cat={cat} filters={filters} sort={sort} />
       <Newsletter />
-      <Footer /> 
-        </>
-        :
-        <Spinner/>
-      }
+      <Footer />
     </Container>
   );
 }
