@@ -6,7 +6,7 @@ import { mobile } from "../Responsive"
 const Container = styled.div`
     display: flex;
 
-    ${mobile({flexDirection: "column", backgroundColor:"#01D6C0"})}
+    ${mobile({flexDirection: "column", backgroundColor:"#ffffff"})}
 `
 const Left = styled.div`
     flex: 1;
@@ -29,7 +29,7 @@ const SocialIcon = styled.div`
     height: 40px;
     border-radius: 50%;
     color: white;
-    background-color: #${props=> props.color};
+    background-color: black;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,7 +42,7 @@ const Center = styled.div`
 
     ${mobile({display: "none"})}
 `
-const Title = styled.h3`
+const Title = styled.h2`
     margin-bottom: 30px;
 `
 const List = styled.ul`
@@ -76,7 +76,7 @@ const ContactItem = styled.div`
 const Payments = styled.img`
     width: 50%;
     margin-left: -5px;
-    ${mobile({filter:"brightness(70%)"})}
+    
 `
 
 
@@ -92,19 +92,19 @@ const Footer = () => {
           velit a eius doloribus rerum.
         </Desc>
         <SocialContainer>
-          <SocialIcon color="3B5999">
+          <SocialIcon>
             <Facebook />
           </SocialIcon>
-          <SocialIcon color="E4405F">
+          <SocialIcon>
             <Instagram />
           </SocialIcon>
-          <SocialIcon color="55ACEE">
+          <SocialIcon>
             <Twitter />
           </SocialIcon>
-          <SocialIcon color="E60023">
+          <SocialIcon>
             <GitHub />
           </SocialIcon>
-          <SocialIcon color="440E64">
+          <SocialIcon>
             <Pinterest />
           </SocialIcon>
         </SocialContainer>

@@ -7,21 +7,24 @@ import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 
 const Container = styled.div`
-  height: 60px;
+  height: 65px;
   text-decoration: none;
-  background-color:#ffdf40;
+  user-select:none;
+  background-color:#ffffff;
+  background-image: url("https://i.ibb.co/5k861B6/pexels-juan-mendez-1536619-1.jpg");
+  background-position: bottom;
 
   ${mobile({height: "85px",marginBottom:"10px"})}
 `;
 
 const Wrapper = styled.div`
-  padding: 5px 20px;
+  padding: 0px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   align-content: center;
 
-  ${mobile({boxSizing:"borderBox",justifyContent:"spaceAround",padding: "10px 15px", backgroundColor: "pink"})}
+  ${mobile({boxSizing:"borderBox",justifyContent:"spaceAround",padding: "0px 5px"})}
 `;
 const Left = styled.div`
   flex: 1;
@@ -31,29 +34,33 @@ const Left = styled.div`
 `;
 const Input = styled.input`
     border: none;
-
+    padding: 0px;
+    font-size: 17px;
+    text-align: center;
+    background-color:#fffb28e6;
+    &:focus{
+      outline: none;
+    }
     ${mobile({width: "50px"})}
 `
 const SearchContainer = styled.div`
-    border: 0.5px solid lightgray;
+    border: 1px solid;
     display: flex;
     margin-left: 25px;
     padding: 5px;
     align-items: center;
 `;
 
-
 const Center = styled.div`
-  flex: 1;
+  flex: 1.5;
   text-align: center;
 `;
 const Logo = styled.div`
-
-    ${mobile({fontSize: "24px"})}
+  ${mobile({fontSize: "24px"})}
 `
 const Image = styled.img`
-  width: 15%;
-  ${mobile({width: "90%"})}
+  width: 85px;
+  ${mobile({width: "85%"})}
 `;
 
 const Right = styled.div`
@@ -72,7 +79,7 @@ const MenuItem = styled.div`
     &:hover{
       color: #3f3f3f;
     }
-    ${mobile({width: "100%",fontSize: "16px", marginRight: "25px"})}
+    ${mobile({width: "100%",fontSize: "15px", marginRight: "15px"})}
 `
 
 const Navbar = () => {
@@ -82,7 +89,7 @@ const Navbar = () => {
 
   const logout = () =>{
       localStorage.clear();
-      navigate("/")
+      navigate("/login")
       window.location.reload();
   }
 
@@ -92,14 +99,14 @@ const Navbar = () => {
         <Left>
           <SearchContainer>
             <Input placeholder="Search" />
-            <Search style={{ color: "gray", fontSize: 16 }} />
+            <Search style={{ color: "black", fontSize: 18 }} />
           </SearchContainer>
         </Left>
         <Center>
           <Logo>
-          <NavLink to="/">
-          <Image src="https://i.ibb.co/kS7V2kg/Fashion-shop-logo-design-on-transparent-background-PNG.png"></Image>
-          </NavLink>
+            <NavLink to="/">
+              <Image src="https://i.ibb.co/kS7V2kg/Fashion-shop-logo-design-on-transparent-background-PNG.png"></Image>
+            </NavLink>
           </Logo>
         </Center>
         <Right>
@@ -109,16 +116,24 @@ const Navbar = () => {
                 style={{ textDecoration: "none", color: "black" }}
                 to="/register"
               >
-                <MenuItem><b>REGISTER</b></MenuItem>
+                <MenuItem>
+                  <b>REGISTER</b>
+                </MenuItem>
               </NavLink>
               <NavLink
                 style={{ textDecoration: "none", color: "black" }}
                 to="/login"
               >
-                <MenuItem><b>SIGN IN</b></MenuItem>
+                <MenuItem>
+                  <b>SIGN IN</b>
+                </MenuItem>
               </NavLink>
             </>
-          ) : <MenuItem onClick={logout}><b>LOGOUT</b></MenuItem>}
+          ) : (
+            <MenuItem onClick={logout}>
+              <b>LOGOUT</b>
+            </MenuItem>
+          )}
           <NavLink
             style={{ textDecoration: "none", color: "black" }}
             to="/cart"

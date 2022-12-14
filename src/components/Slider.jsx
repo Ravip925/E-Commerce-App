@@ -39,12 +39,14 @@ const Wrapper = styled.div`
   display: flex;
   transition: all 1.5s ease-in-out;
   transform: translateX(${props=> props.slideIndex * -100}vw);
+  
 `;
 const Slide = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
   align-items: center;
+  
 `;
 
 const ImgContainer = styled.div`

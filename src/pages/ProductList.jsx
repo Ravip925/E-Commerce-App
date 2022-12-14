@@ -59,12 +59,30 @@ const Option = styled.option`
   font-size:15px;
  
 `
+const Spinner = styled.div`
+  border: 10px solid #f3f3f3;
+  border-top: 10px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+`
+
 
 const ProductList = () => {
   const location = useLocation();
   const cat = location.pathname.split("/")[2];
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState("newest");
+
 
   const handleFilters = (e) => {
     const value = e.target.value;
@@ -82,7 +100,10 @@ const ProductList = () => {
     <Container>
       <Annoucement />
       <Navbar />
-      <Title>{cat}</Title>
+      {
+        cat ? 
+        <>
+          <Title>{cat}</Title>
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products:</FilterText>
@@ -118,7 +139,11 @@ const ProductList = () => {
       </FilterContainer>
       <Products cat={cat} filters={filters} sort= {sort}/>
       <Newsletter />
-      <Footer />
+      <Footer /> 
+        </>
+        :
+        <Spinner/>
+      }
     </Container>
   );
 }

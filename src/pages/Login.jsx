@@ -5,59 +5,69 @@ import styled from "styled-components"
 import { login } from "../redux/apiCalls"
 import { mobile } from "../Responsive"
 
+
 const Container = styled.div`
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(rgba(255,255,255, 0.5), rgba(255,255,255,0.5)), url("https://images.pexels.com/photos/6984650/pexels-photo-6984650.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
-    display: flex;
-    background-size: cover;
-    align-items: center;
-    justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url("https://i.ibb.co/MV91s8s/pexels-mica-asato-1082529.jpg");
+  display: flex;
+  background-size: cover;
+  align-items: center;
+  justify-content: center;
+`;
 
-`
 const Wrapper = styled.div`
-    width: 25%;
-    padding: 20px;
-    background-color: white;
+  width: 25%;
+  border-radius: 20px;
+  padding: 35px;
+  background-color: white;
 
-    ${mobile({width: "75%"})}
-`
+  ${mobile({borderRadius:"0",padding: "25px",width: "75%"})}
+`;
+
 const Form = styled.form`
-    display: flex;
-    flex-direction: column;
-`
-const Title = styled.h1`
-    font-size: 24px;
-    font-weight: 300;
-`
-const Input = styled.input`
-    flex: 1;
-    min-width:40%;
-    margin: 10px 0;
-    padding: 10px;
-`
-const Button = styled.button`
-    width: 40%;
-    border: none;
-    padding: 15px 20px;
-    background-color: teal;
-    color: white;
-    cursor: pointer;
-    margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  &:hover ${Container} {
+    filter: brightness(50%);
+  }
+`;
 
-    &:disabled{
-      color: green;
-      cursor: not-allowed;
-    }
-`
+const Title = styled.h1`
+  font-size: 24px;
+  font-weight: 300;
+`;
+const Input = styled.input`
+  flex: 1;
+  font-size: 17px;
+  min-width: 40%;
+  margin: 10px 0;
+  padding: 10px;
+`;
+const Button = styled.button`
+  width: 40%;
+  border: none;
+  padding: 15px 20px;
+  background-color: teal;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 10px;
+
+  &:disabled {
+    color: green;
+    cursor: not-allowed;
+  }
+`;
 const Div = styled.div`
   width: 100%;
+  margin-top: 10px;
   display: flex;
   justify-content: space-between;
-`
+`;
 const Error = styled.span`
-    color:red;
-`
+  color: red;
+`;
 
 
 const Login = () => {

@@ -42,7 +42,7 @@ const Square = styled.div`
   width: 60px;
   height: 60px;
   background-color: #ff8181e2;
-  border-bottom-left-radius: 50px;
+  border-bottom-left-radius: 55px;
   text-align: center;
   box-sizing: border-box;
   font-size: 23px;

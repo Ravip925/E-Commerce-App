@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 const Container = styled.div`
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(rgba(255,255,255, 0.5), rgba(255,255,255,0.5)), url("https://images.pexels.com/photos/6984661/pexels-photo-6984661.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("https://i.ibb.co/sy0RWxZ/pexels-sebastian-arie-voortman-988914.jpg");
     display: flex;
     background-size: cover;
     align-items: center;
@@ -16,10 +16,11 @@ const Container = styled.div`
 `
 const Wrapper = styled.div`
     width: 40%;
-    padding: 20px;
+    border-radius: 30px;
+    padding: 40px;
     background-color: white;
 
-    ${mobile({width: "75%"})}
+    ${mobile({borderRadius:"0",padding: "20px",width: "75%"})}
 `
 const Form = styled.form`
     display: flex;
@@ -31,6 +32,7 @@ const Title = styled.h1`
 `
 const Input = styled.input`
     flex: 1;
+    font-size: 17px;
     min-width:40%;
     margin: 20px 10px 0 0;
     padding: 10px;

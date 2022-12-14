@@ -4,11 +4,13 @@ import { mobile } from "../Responsive"
 
 const Container = styled.div`
     height: 60vh;
-    background-color: #fcf5f5;
+    background-color: #ffa3a3;
     display: flex;
+   // #fcf5f5
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    ${mobile({padding: "0 20px"})}
 `
 const Title = styled.h1`
   font-size: 70px;

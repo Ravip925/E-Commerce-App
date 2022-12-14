@@ -13,7 +13,7 @@ import { mobile } from "../Responsive"
 import { useLayoutEffect } from "react";
 
 const Container = styled.div`
-    background-color: #ffdeaf;
+    background-color: #ffffff;
 `
 const Wrapper = styled.div`
     padding: 50px;
@@ -124,6 +124,7 @@ const Button = styled.button`
         background-color: #fbe8e8;
     }
 `
+
     
 
 
@@ -136,6 +137,8 @@ const Product = () => {
     const [quantity, setQuantity] = useState(1);
     const [color, setColor] = useState("");
     const [size, setSize] = useState("");
+    const [showText, setShowText] = useState(false);
+    
 
     useEffect(() => {
         const getProduct = async() => {
@@ -158,6 +161,7 @@ const Product = () => {
 
     const handleClick = () =>{
         dispatch(addProduct({...product, quantity, color,size}))
+        setShowText(!showText);
     }
 
     useLayoutEffect(() => {
@@ -165,6 +169,7 @@ const Product = () => {
       });
   return (
     <Container>
+        
         <Annoucement/>
         <Navbar/>
         <Wrapper>
@@ -202,7 +207,7 @@ const Product = () => {
                         <Amount>{quantity}</Amount>
                         <Add onClick={()=>handleQuantity("inc")}/>
                     </AmountContainer>
-                    <Button onClick={handleClick}>ADD TO CART</Button>
+                    <Button onClick={handleClick}>{showText? "ADDED TO CART": "ADD TO CART"}</Button>
                 </AddContainer>
             </InfoContainer>
         </Wrapper>

@@ -35,9 +35,9 @@ const TopButton = styled.button`
     padding: 10px;
     font-weight: 600;
     cursor: pointer;
-    border: ${props=> props.type === "filled" && "none"};
-    background-color: ${props=> props.type === "filled" ? "black" : "transparent"};
-    color: ${props=> props.type === "filled" && "White"};
+    background-color: transparent;
+    border: 3px solid teal;
+    box-shadow: 4px 4px 8px rgba(0,0,0,0.3);
 `
 const TopTexts = styled.div`
     ${mobile({display: "none"})}
@@ -164,35 +164,31 @@ const B = styled.b`
 
 const Cart = () => {
     const cart = useSelector((state) => state.cart);
-    const user = useSelector(state=> state.user.currentUser);
+    const user = useSelector((state) => state.user.currentUser);
     const [stripeToken, setStripeToken] = useState(null);
     const navigate = useNavigate();
 
+    const checkout = () => {
+      if (!user) {
+        alert("Please Login");
+      } else if (cart.total < 1) {
+        alert("Please Add Something To Cart");
+      }
+    };
+    const onToken = (token) => {
+      setStripeToken(token);
+    };
 
-   const onToken =(token)=>{
-    setStripeToken(token)
-   }
-
-   const checkout =()=>{
-    if(!user){
-      alert("Please Login")
-    }
-    else if(cart.total<1){
-      alert("Please Add Something To Cart")
-    }
-   }
-   
-   useEffect(()=>{
-    const makeRequest = async()=>{
-      
+    useEffect(() => {
+      const makeRequest = async () => {
         const res = await userRequest.post("/checkout/payment", {
-          tokenId : stripeToken.id,
-          amount: cart.total*100,
+          tokenId: stripeToken.id,
+          amount: cart.total * 100,
         });
         navigate("/success", res);
-    }
-    stripeToken && cart.total>=1 && makeRequest();
-   },[stripeToken, cart.total, navigate])
+      };
+      stripeToken && cart.total >= 1 && makeRequest();
+    }, [stripeToken, cart.total, navigate]);
  
   
 
@@ -237,7 +233,7 @@ const Cart = () => {
                 </ProductDetail>
                 <PriceDetail>
                   <ProductAmountContainer>
-                    <Add />
+                    <Add/>
                     <ProductAmount>{product.quantity}</ProductAmount>
                     <Remove />
                   </ProductAmountContainer>
@@ -257,11 +253,11 @@ const Cart = () => {
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>$5.5</SummaryItemPrice>
+              <SummaryItemPrice>${cart.total===0? "0" : "5.5"}</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Shipping Discount</SummaryItemText>
-              <SummaryItemPrice>-$5.5</SummaryItemPrice>
+              <SummaryItemPrice>-${cart.total===0? "0" : "5.5"}</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
@@ -269,7 +265,7 @@ const Cart = () => {
             </SummaryItem>
             {user && cart.total>=1 ? (
               <StripeCheckout
-                name="Shop"
+                name="Fashion Shop"
                 image="https://i.ibb.co/WyD4skn/vecteezy-colorful-beauty-dancer-logo-illustration-vector-template-8214205.png"
                 billingAddress
                 shippingAddress
