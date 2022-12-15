@@ -13,7 +13,7 @@ const Container = styled.div`
   position: relative;
   overflow: hidden;
 
-  ${mobile({display: "none"})}
+  ${mobile({ display: "none" })}
 `;
 const Arrow = styled.div`
   width: 50px;
@@ -38,8 +38,7 @@ const Wrapper = styled.div`
   height: 100%;
   display: flex;
   transition: all 1.5s ease-in-out;
-  transform: translateX(${props=> props.slideIndex * -100}vw);
-  
+  transform: translateX(${(props) => props.slideIndex * -100}vw);
 `;
 const Slide = styled.div`
   width: 100vw;
@@ -56,7 +55,7 @@ const ImgContainer = styled.div`
 
 const Image = styled.img`
   height: 90%;
-  margin-top:-50px;
+  margin-top: -50px;
   margin-left: 10vw;
 `;
 
@@ -84,37 +83,35 @@ const BottomText = styled.h1`
 `;
 
 const Slider = () => {
-  const navigate =  useNavigate();
+  const navigate = useNavigate();
   const [slideIndex, setSlideIndex] = useState(0);
-  
+
   const handleClick = (direction) => {
-    if(direction === "left"){
-      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2)
-    }
-    else{
-      setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0)
+    if (direction === "left") {
+      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2);
+    } else {
+      setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
     }
   };
 
-
-  const handleEvent=()=>{
-    if(slideIndex===0){
-      navigate("/products/dress")
-    }else if(slideIndex===1){
-      navigate("/products/men")
-    }else{
-      navigate("/products/tshirt")
+  const handleEvent = () => {
+    if (slideIndex === 0) {
+      navigate("/products/dress");
+    } else if (slideIndex === 1) {
+      navigate("/products/men");
+    } else {
+      navigate("/products/tshirt");
     }
-  }
+  };
 
   return (
     <Container>
       <Arrow direction="left" onClick={() => handleClick("left")}>
         <ArrowBackIos />
       </Arrow>
-      <Wrapper onClick={handleEvent} slideIndex = {slideIndex}>
-        {sliderItems.map((item,index) => (
-          <Slide key={index} bg={item.bg}> 
+      <Wrapper onClick={handleEvent} slideIndex={slideIndex}>
+        {sliderItems.map((item, index) => (
+          <Slide key={index} bg={item.bg}>
             <ImgContainer>
               <Image src={item.img} />
             </ImgContainer>

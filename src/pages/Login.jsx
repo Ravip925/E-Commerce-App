@@ -1,10 +1,9 @@
-import { useState } from "react"
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components"
-import { login } from "../redux/apiCalls"
-import { mobile } from "../Responsive"
-
+import styled from "styled-components";
+import { login } from "../redux/apiCalls";
+import { mobile } from "../Responsive";
 
 const Container = styled.div`
   width: 100vw;
@@ -23,7 +22,7 @@ const Wrapper = styled.div`
   padding: 35px;
   background-color: white;
 
-  ${mobile({borderRadius:"0",padding: "25px",width: "75%"})}
+  ${mobile({ borderRadius: "0", padding: "25px", width: "75%" })}
 `;
 
 const Form = styled.form`
@@ -69,34 +68,42 @@ const Error = styled.span`
   color: red;
 `;
 
-
 const Login = () => {
   const navigate = useNavigate();
-  const [username, setUserName]= useState("");
-  const [password, setPassword]= useState("");
+  const [username, setUserName] = useState("");
+  const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const { isFetching, error } = useSelector((state) => state.user);
-  
-  const handleClick =(e)=>{
+
+  const handleClick = (e) => {
     e.preventDefault();
-    login(dispatch, {username, password})
+    login(dispatch, { username, password });
   };
   return (
     <Container>
-        <Wrapper>
+      <Wrapper>
         <Title>SIGN IN</Title>
         <Form>
-          <Input placeholder="username" onChange={(e)=>setUserName(e.target.value)}/>
-          <Input type="password" placeholder="password" onChange={(e)=>setPassword(e.target.value)}/>
+          <Input
+            placeholder="username"
+            onChange={(e) => setUserName(e.target.value)}
+          />
+          <Input
+            type="password"
+            placeholder="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
           <Div>
-            <Button onClick={handleClick} disabled={isFetching}>LOGIN</Button>
-            <Button onClick={()=>navigate("/register")}>SIGN UP</Button>
-            </Div>
-            {error && <Error>Something went wrong...</Error>}
+            <Button onClick={handleClick} disabled={isFetching}>
+              LOGIN
+            </Button>
+            <Button onClick={() => navigate("/register")}>SIGN UP</Button>
+          </Div>
+          {error && <Error>Something went wrong...</Error>}
         </Form>
       </Wrapper>
     </Container>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

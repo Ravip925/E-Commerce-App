@@ -1,23 +1,23 @@
-import { Link } from "react-router-dom"
-import styled from "styled-components"
-import { mobile } from "../Responsive"
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { mobile } from "../Responsive";
 
 const Image = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: all 0.5s ease;
-  ${mobile({height: "30vh"})}
-`
+  ${mobile({ height: "30vh" })}
+`;
 const Container = styled.div`
   margin: 3px;
   height: 70vh;
   flex: 1;
   position: relative;
-  &:hover ${Image}{
-      filter: brightness(60%);
-    }
-`
+  &:hover ${Image} {
+    filter: brightness(60%);
+  }
+`;
 const Info = styled.div`
   position: absolute;
   width: 100%;
@@ -28,13 +28,11 @@ const Info = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
-
-`
+`;
 const Title = styled.h1`
   color: white;
   margin-bottom: 20px;
-`
+`;
 const Button = styled.button`
   border: none;
   padding: 10px;
@@ -42,9 +40,9 @@ const Button = styled.button`
   background-color: white;
   color: gray;
   font-weight: 600;
-  `
+`;
 
-const CategoryItem = ({item}) => {
+const CategoryItem = ({ item }) => {
   return (
     <Container>
       <Link to={`/products/${item.category}`}>
@@ -56,6 +54,6 @@ const CategoryItem = ({item}) => {
       </Link>
     </Container>
   );
-}
+};
 
-export default CategoryItem
+export default CategoryItem;

@@ -1,5 +1,5 @@
 import { Add, Remove } from "@mui/icons-material"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
 import Annoucement from "../components/Annoucement"
 import Footer from "../components/Footer"
@@ -9,6 +9,7 @@ import StripeCheckout from 'react-stripe-checkout'
 import { useEffect, useState } from "react"
 import { userRequest } from "../requestMethods"
 import { NavLink, useNavigate } from "react-router-dom"
+import { decrementQuantity, incrementQuantity, removeItem } from "../redux/cartRedux"
 
 const KEY = process.env.REACT_APP_STRIPE_KEY;
 
@@ -47,6 +48,15 @@ text-decoration: underline;
 cursor: pointer;
 margin: 0 10px;
 `
+const IsCartEmpty = styled.h1`
+    text-align: center;
+    font-size: 1.8rem;
+    color: #ff2929;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    ${mobile({fontSize: "1.2rem"})}
+`
+
 const Bottom = styled.div`
     display: flex;
     justify-content: space-between;
@@ -112,7 +122,7 @@ const ProductAmountContainer = styled.div`
 `
 const ProductAmount = styled.div`
     font-size: 24px;
-    margin: 5px;
+    margin: 5px 15px;
 
     ${mobile({margin: "5px 15px"})}
 `
@@ -130,6 +140,7 @@ const Summary = styled.div`
     border-radius: 10px;
     padding: 10px;
     height: 50vh;
+    margin-top: 10px;
     
     ${mobile({boxSizing: "borderBox",padding: "20px", marginBottom: "40px", width: "82%",marginLeft:"10px"})}
 `
@@ -143,10 +154,15 @@ const SummaryItem = styled.div`
     font-weight: ${props=> props.type === "total" && 500};
     font-size: ${props=> props.type === "total" && "24px"};
 `
-const SummaryItemText = styled.span`
- 
+const RemoveItem = styled.h2`
+  margin-top: 15px;
+  color: #e91515;
+  cursor: pointer;
 `
 const SummaryItemPrice = styled.span`
+    
+`
+const SummaryItemText = styled.span`
     
 `
 const SummaryButton = styled.button`
@@ -167,6 +183,7 @@ const Cart = () => {
     const user = useSelector((state) => state.user.currentUser);
     const [stripeToken, setStripeToken] = useState(null);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const checkout = () => {
       if (!user) {
@@ -178,6 +195,7 @@ const Cart = () => {
     const onToken = (token) => {
       setStripeToken(token);
     };
+
 
     useEffect(() => {
       const makeRequest = async () => {
@@ -204,10 +222,11 @@ const Cart = () => {
             <TopButton>CONTINUE SHOPPING</TopButton>
           </NavLink>
           <TopTexts>
-            <TopText>Shopping Bag <b>{(cart.quantity)}</b></TopText>
+            <TopText>Shopping Bag <b style={{color:"blue"}}>{(cart.quantity)}</b></TopText>
             <TopText>Your Wishlist(0)</TopText>
           </TopTexts>
         </Top>
+        {cart.quantity===0? <IsCartEmpty>YOUR CART IS EMPTY !!</IsCartEmpty>:null}
         <Bottom>
           <Info>
             {cart.products?.map((product, index) => (
@@ -233,13 +252,14 @@ const Cart = () => {
                 </ProductDetail>
                 <PriceDetail>
                   <ProductAmountContainer>
-                    <Add/>
-                    <ProductAmount>{product.quantity}</ProductAmount>
-                    <Remove />
+                    <Remove style={{cursor:"pointer"}} onClick={()=>dispatch(decrementQuantity(product._id))}/>
+                    <ProductAmount><b>{product.quantity}</b></ProductAmount>
+                    <Add style={{cursor:"pointer"}} onClick={()=>dispatch(incrementQuantity(product._id))}/>
                   </ProductAmountContainer>
                   <ProductPrice>
                     $ {product.price * product.quantity}
                   </ProductPrice>
+                  <RemoveItem onClick={()=>dispatch(removeItem(product))}>Remove</RemoveItem>
                 </PriceDetail>
               </Product>
             ))}

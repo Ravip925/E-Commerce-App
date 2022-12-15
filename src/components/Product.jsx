@@ -6,6 +6,7 @@ import {
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { useLayoutEffect } from "react";
+import { mobile } from "../Responsive";
 
 const Info = styled.div`
   opacity: 0;
@@ -84,41 +85,76 @@ const Icon = styled.div`
   }
 `;
 
+const Spinner = styled.div`
+  border: 10px solid #f3f3f3;
+  border-top: 10px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  position: absolute;
+  top: 35%;
+  left: 40%;
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  ${mobile({
+    width: "30px",
+    height: "30px",
+    border: "8px solid #f3f3f3",
+    borderTop: "8px solid #3498db",
+    left: "46%",
+    top: "30%",
+  })}
+`;
+
 const Product = ({ item }) => {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   });
   return (
     <Container>
-      <Square>${item.price}</Square>
-      <Circle />
-      <Image src={item.img} />
-      <Info>
-        <Icon>
-          <NavLink
-            style={{ textDecoration: "none", color: "black" }}
-            to={`/product/${item._id}`}
-          >
-            <ShoppingCartOutlined />
-          </NavLink>
-        </Icon>
-        <Icon>
-          <NavLink
-            style={{ textDecoration: "none", color: "black" }}
-            to={`/product/${item._id}`}
-          >
-            <SearchOutlined />
-          </NavLink>
-        </Icon>
-        <Icon>
-          <NavLink
-            style={{ textDecoration: "none", color: "black" }}
-            to={`/product/${item._id}`}
-          >
-            <FavoriteBorderOutlined />
-          </NavLink>
-        </Icon>
-      </Info>
+      {item ? (
+        <>
+          <Square>${item.price}</Square>
+          <Circle />
+          <Image src={item.img} />
+          <Info>
+            <Icon>
+              <NavLink
+                style={{ textDecoration: "none", color: "black" }}
+                to={`/product/${item._id}`}
+              >
+                <ShoppingCartOutlined />
+              </NavLink>
+            </Icon>
+            <Icon>
+              <NavLink
+                style={{ textDecoration: "none", color: "black" }}
+                to={`/product/${item._id}`}
+              >
+                <SearchOutlined />
+              </NavLink>
+            </Icon>
+            <Icon>
+              <NavLink
+                style={{ textDecoration: "none", color: "black" }}
+                to={`/product/${item._id}`}
+              >
+                <FavoriteBorderOutlined />
+              </NavLink>
+            </Icon>
+          </Info>
+        </>
+      ) : (
+        <Spinner />
+      )}
     </Container>
   );
 };

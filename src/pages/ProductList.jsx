@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import styled from "styled-components"
+import styled from "styled-components";
 import Annoucement from "../components/Annoucement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
@@ -9,35 +9,32 @@ import Products from "../components/Products";
 import { mobile } from "../Responsive";
 import { useLayoutEffect } from "react";
 
-const Container = styled.div`
-    
-`
+const Container = styled.div``;
 const Title = styled.h1`
-    margin: 20px;
-
-`
+  margin: 20px;
+`;
 const FilterContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-`
+  display: flex;
+  justify-content: space-between;
+`;
 const Filter = styled.div`
-    margin: 20px;
+  margin: 20px;
 
-    ${mobile({width: "0 20px", display: "flex", flexDirection: "column"})}
-`
+  ${mobile({ width: "0 20px", display: "flex", flexDirection: "column" })}
+`;
 const FilterText = styled.span`
-    font-size: 20px;
-    font-weight: 600;
-    margin-right: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  margin-right: 10px;
 
-    ${mobile({marginRight: "5px"})}
-`
+  ${mobile({ marginRight: "5px" })}
+`;
 
 const Select = styled.select`
   width: 150px;
   padding: 10px;
   font-size: 16px;
-  font-weight:600;
+  font-weight: 600;
   margin-right: 20px;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -54,13 +51,10 @@ const Select = styled.select`
   ${mobile({ margin: "10px 0px" })}
 `;
 const Option = styled.option`
-  list-style:none;
+  list-style: none;
   outline: none;
-  font-size:15px;
- 
-`
-
-
+  font-size: 15px;
+`;
 
 const ProductList = () => {
   const location = useLocation();
@@ -68,14 +62,13 @@ const ProductList = () => {
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState("newest");
 
-
   const handleFilters = (e) => {
     const value = e.target.value;
     setFilters({
       ...filters,
       [e.target.name]: value,
     });
-  }
+  };
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
@@ -124,6 +117,6 @@ const ProductList = () => {
       <Footer />
     </Container>
   );
-}
+};
 
-export default ProductList
+export default ProductList;
