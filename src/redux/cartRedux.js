@@ -39,7 +39,7 @@ const cartSlice = createSlice({
             let newtotal = state.total-(itemToRemove.price * itemToRemove.quantity);
             state.products = removeItem;
             state.total = newtotal;
-            let newQnt = state.quantity -(itemToRemove.quantity);
+            let newQnt = state.quantity -1;
             state.quantity = newQnt;
           },
         
